@@ -1,3 +1,4 @@
+// Allowed values for the "alignment" property
 type Alignments =
 	| "Lawful Good"
 	| "Neurtal Good"
@@ -9,13 +10,13 @@ type Alignments =
 	| "Neutral Evil"
 	| "Chaotic Evil";
 
-const detect = "The dragon makes a Wisdom (Perception) check.";
-const darkVision = "Can see in the dark, or something.";
+// The "Senses" enum
 enum Senses {
-	detect,
-	darkVision,
+	DETECT = "Wisdom (Perception check)",
+	DARK_VISION = "See in the dark",
 }
 
+// Shape of the "Dragon" object
 interface Dragon {
 	name: string;
 	size: string;
@@ -25,11 +26,12 @@ interface Dragon {
 	HP: number;
 	languages: string[];
 	CR: number;
-	senses: Senses.detect;
+	senses: Senses.DETECT;
 	skills: number | string;
 	meleeAttacks: [string, string, string];
 }
 
+// An array of the "Dragon" objects
 const dragons: Dragon[] = [
 	{
 		name: "Adult Bronze Dragon",
@@ -40,7 +42,7 @@ const dragons: Dragon[] = [
 		HP: 212,
 		languages: ["Draconic", "Common"],
 		CR: 15,
-		senses: Senses.detect,
+		senses: Senses.DETECT,
 		skills: "Insight +7, Perception +12, Stealth +5",
 		meleeAttacks: ["bite", "claws", "tail"],
 	},
@@ -53,7 +55,7 @@ const dragons: Dragon[] = [
 		HP: 256,
 		languages: ["Draconic", "Common"],
 		CR: 17,
-		senses: Senses.detect,
+		senses: Senses.DETECT,
 		skills: "Perception +13, Stealth +6",
 		meleeAttacks: ["bite", "claws", "tail"],
 	},
@@ -66,8 +68,20 @@ const dragons: Dragon[] = [
 		HP: 243,
 		languages: ["Draconic", "Common"],
 		CR: 16,
-		senses: Senses.detect,
+		senses: Senses.DETECT,
 		skills: "Arcana +8, History +8, Perception +11, Stealth +5",
 		meleeAttacks: ["bite", "claws", "tail"],
 	},
 ];
+
+// returns a value of the type "boolean" only
+function topDragonCheck(): boolean {
+	let speciesCheck: boolean = false;
+	if (dragons[0].species === "Dragon") {
+		return (speciesCheck = true);
+	}
+	return speciesCheck;
+}
+
+console.log("Here be some DRAGONS! ", dragons);
+console.log("Is the first dragon a dragon? ", topDragonCheck());
